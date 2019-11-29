@@ -1,15 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
-	"strings"
+
+	"covermyass/src/utils"
 )
 
-var logs_files = []string{
+var generalLogs = []string{
 	"/var/log/messages",
-	"/var/log/auth.log",
 	"/var/log/kern.log",
 	"/var/log/cron.log",
 	"/var/log/maillog",
@@ -30,12 +29,21 @@ var logs_files = []string{
 	"~/Library/Logs/DiagnosticReports",
 }
 
+var authLogs = []string{
+	"/var/log/auth.log",
+}
+
+var historyLogs = []string{
+	"~/.bash_history",
+	"~/.zsh_history",
+}
+
 func displayMenu() {
-	menu := `Welcome to Cover my ass tool !
+	menu := `Welcome to Cover My Ass !
 
 Select an option :
 
-1) Clear logs for user $USER
+1) Clear your own logs
 2) Permenently disable auth & bash history
 3) Restore settings to default
 99) Exit tool
@@ -44,47 +52,30 @@ Select an option :
 	fmt.Println(menu)
 }
 
-func readInput(separator string) string {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print(separator)
-	input, _ := reader.ReadString('\n')
-
-	return strings.TrimRight(input, "\n")
-}
-
-func clearLogs() {}
-
-func enableAuthLogs()  {}
-func disableAuthLogs() {}
-func clearAuthLogs()   {}
-
-func enableHistory()  {}
-func disableHistory() {}
-func clearHistory()   {}
-
-func throwError(err string) {
-	panic(err)
-}
-
 func main() {
 	displayMenu()
-	choice := readInput("> ")
+	run()
+
+	os.Exit(0)
+}
+
+func run() {
+	choice := utils.ReadInput("> ")
 
 	switch choice {
 	case "1":
-		clearLogs()
-		clearHistory()
+		utils.ClearFiles(generalLogs)
+		utils.ClearFiles(historyLogs)
 	case "2":
-		disableAuthLogs()
-		disableHistory()
+		utils.MockFiles(authLogs)
+		utils.MockFiles(historyLogs)
 	case "3":
-		enableAuthLogs()
-		enableHistory()
+		utils.UnmockFiles(authLogs)
+		utils.UnmockFiles(historyLogs)
 	case "99":
-		return
+		os.Exit(0)
 	default:
-		throwError("Unrecognized choice")
+		fmt.Println("[!] Unreconized option.")
+		run()
 	}
-
-	fmt.Println(logs_files)
 }
