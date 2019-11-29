@@ -27,3 +27,10 @@ jobs:
           chmod +x ./scripts/*.sh
           ./scripts/test.sh
           ./scripts/lint.sh
+      - name: Report code coverage
+        uses: paambaati/codeclimate-action@v2.3.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.code_climate_reporter_id }}
+        with:
+          coverageCommand: npm run coverage
+          debug: true
