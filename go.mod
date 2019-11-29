@@ -1,3 +1,3 @@
-module github.com/sundowndev/go-covermyass
+module covermyass
 
 go 1.13
