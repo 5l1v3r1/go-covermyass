@@ -4,41 +4,12 @@ import (
 	"fmt"
 	"os"
 
+	"covermyass/src/config"
 	"covermyass/src/utils"
 )
 
-var generalLogs = []string{
-	"/var/log/messages",
-	"/var/log/kern.log",
-	"/var/log/cron.log",
-	"/var/log/maillog",
-	"/var/log/boot.log",
-	"/var/log/mysqld.log",
-	"/var/log/qmail",
-	"/var/log/httpd",
-	"/var/log/lighttpd",
-	"/var/log/secure",
-	"/var/log/utmp",
-	"/var/log/wtmp",
-	"/var/log/yum.log",
-	"/var/log/system.log",
-	"/var/log/DiagnosticMessages",
-	"/Library/Logs",
-	"/Library/Logs/DiagnosticReports",
-	"~/Library/Logs",
-	"~/Library/Logs/DiagnosticReports",
-}
-
-var authLogs = []string{
-	"/var/log/auth.log",
-}
-
-var historyLogs = []string{
-	"~/.bash_history",
-	"~/.zsh_history",
-}
-
 func displayMenu() {
+
 	menu := `Welcome to Cover My Ass !
 
 Select an option :
@@ -51,7 +22,6 @@ Select an option :
 
 	fmt.Println(menu)
 }
-
 func main() {
 	displayMenu()
 	run()
@@ -64,14 +34,14 @@ func run() {
 
 	switch choice {
 	case "1":
-		utils.ClearFiles(generalLogs)
-		utils.ClearFiles(historyLogs)
+		utils.Clear(config.GeneralLogs)
+		utils.Clear(config.HistoryLogs)
 	case "2":
-		utils.MockFiles(authLogs)
-		utils.MockFiles(historyLogs)
+		utils.Mock(config.AuthLogs)
+		utils.Mock(config.HistoryLogs)
 	case "3":
-		utils.UnmockFiles(authLogs)
-		utils.UnmockFiles(historyLogs)
+		utils.Unmock(config.AuthLogs)
+		utils.Unmock(config.HistoryLogs)
 	case "99":
 		os.Exit(0)
 	default:

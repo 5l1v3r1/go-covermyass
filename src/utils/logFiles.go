@@ -20,14 +20,14 @@ func process(files []string, callback func(path string)) {
 	}
 }
 
-func ClearFiles(files []string) {
+func Clear(files []string) {
 	process(files, func(path string) {
 		// echo "" > /var/log/auth.log
 		fmt.Println("[+] Cleared " + path + " file")
 	})
 }
 
-func UnmockFiles(files []string) {
+func Unmock(files []string) {
 	process(files, func(path string) {
 		// rm -rf /var/log/auth.log
 		// echo "" > /var/log/auth.log
@@ -35,7 +35,7 @@ func UnmockFiles(files []string) {
 	})
 }
 
-func MockFiles(files []string) {
+func Mock(files []string) {
 	process(files, func(path string) {
 		// ln ...
 		fmt.Println("[+] Enabled sending " + path + " logs to /dev/null")
