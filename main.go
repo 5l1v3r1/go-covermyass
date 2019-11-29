@@ -8,8 +8,11 @@ import (
 	"covermyass/src/utils"
 )
 
+/**
+ * Function that displays the tool menu
+ * with multiple choices.
+ */
 func displayMenu() {
-
 	menu := `Welcome to Cover My Ass !
 
 Select an option :
@@ -19,9 +22,12 @@ Select an option :
 3) Restore settings to default
 99) Exit tool
 `
-
 	fmt.Println(menu)
 }
+
+/**
+ * Main function.
+ */
 func main() {
 	displayMenu()
 	run()
@@ -29,6 +35,10 @@ func main() {
 	os.Exit(0)
 }
 
+/**
+ * Function that runs the interactive shell
+ * and processses user input.
+ */
 func run() {
 	choice := utils.ReadInput("> ")
 
