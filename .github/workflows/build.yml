@@ -23,7 +23,7 @@ jobs:
           fi
       - name: Build, test & lint
         run: |
-          go build -v ./src
+          go build -v .
           chmod +x ./build/*.sh
           ./build/test.sh
           ./build/lint.sh
