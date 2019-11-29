@@ -24,6 +24,6 @@ jobs:
       - name: Build, test & lint
         run: |
           go build -v .
-          chmod +x ./build/*.sh
-          ./build/test.sh
-          ./build/lint.sh
+          chmod +x ./scripts/*.sh
+          ./scripts/test.sh
+          ./scripts/lint.sh
