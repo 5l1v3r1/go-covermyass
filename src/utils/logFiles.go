@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func UnmockFiles(files []string) {
+func process(files []string, callback func(path string)) {
 	for _, path := range files {
 		if _, err := os.Stat(path); os.IsNotExist(err) {
 			fmt.Println("[!] " + path + " does not exists. Skipping")
@@ -16,24 +16,28 @@ func UnmockFiles(files []string) {
 			ThrowError("[!] " + path + " is not writable! Retry using sudo.")
 		}
 
-		// rm -rf /var/log/auth.log
-		// echo "" > /var/log/auth.log
-		fmt.Println("[+] Disabled sending " + path + " logs to /dev/null")
+		callback(path)
 	}
 }
 
+func ClearFiles(files []string) {
+	process(files, func(path string) {
+		// echo "" > /var/log/auth.log
+		fmt.Println("[+] Cleared " + path + " file")
+	})
+}
+
+func UnmockFiles(files []string) {
+	process(files, func(path string) {
+		// rm -rf /var/log/auth.log
+		// echo "" > /var/log/auth.log
+		fmt.Println("[+] Disabled sending " + path + " logs to /dev/null")
+	})
+}
+
 func MockFiles(files []string) {
-	for _, path := range files {
-		if _, err := os.Stat(path); os.IsNotExist(err) {
-			fmt.Println("[!] " + path + " does not exists. Skipping")
-			break
-		}
-
-		if isWritable(path) {
-			ThrowError("[!] " + path + " is not writable! Retry using sudo.")
-		}
-
+	process(files, func(path string) {
 		// ln ...
 		fmt.Println("[+] Enabled sending " + path + " logs to /dev/null")
-	}
+	})
 }
