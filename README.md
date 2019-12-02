@@ -2,7 +2,8 @@
 
 [![Build status](https://github.com/SundownDEV/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4b59f310775d23c85617/maintainability)](https://codeclimate.com/github/sundowndev/go-covermyass/maintainability)
-[![Tag](https://img.shields.io/github/tag/SundownDEV/go-covermyass.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/releases)
+[![Issues](https://codeclimate.com/github/sundowndev/go-covermyass/badges/issue_count.svg)](https://codeclimate.com/github/sundowndev/go-covermyass/issues)
+[![Tag](https://img.shields.io/github/tag/SundownDEV/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
 
 Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation.
 
