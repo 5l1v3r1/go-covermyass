@@ -1,11 +1,11 @@
-# Go-Covermyass
+# Covermyass
 
 [![Build status](https://github.com/SundownDEV/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4b59f310775d23c85617/maintainability)](https://codeclimate.com/github/sundowndev/go-covermyass/maintainability)
 [![Issues](https://codeclimate.com/github/sundowndev/go-covermyass/badges/issue_count.svg)](https://codeclimate.com/github/sundowndev/go-covermyass/issues)
 [![Tag](https://img.shields.io/github/tag/SundownDEV/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
 
-Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation.
+Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation. This is a Golang implementation of the original [Covermyass shell script](https://github.com/sundowndev/covermyass).
 
 This tool allows you to clear log files such as :
 
@@ -37,23 +37,37 @@ This tool allows you to clear log files such as :
 
 ## Installation
 
-With sudo
+#### Temporary (global)
 
 ```bash
-sudo curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o /usr/bin/covermyass
-sudo chmod +x /usr/bin/covermyass
+curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o /tmp/covermyass
+chmod +x /tmp/covermyass
+# You can then run it using /tmp/covermyass
 ```
 
-Without sudo :
+#### Permanent (local)
 
 ```bash
-curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o ~/.local/bin/covermyass
-chmod +x ~/.local/bin/covermyass
+curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o /usr/local/bin/covermyass
+chmod +x /usr/local/bin/covermyass
 ```
 
 You can now use the tool using the executable.
 
 Keep in mind that without sudo privileges, you *might* be unable to clear system-level log files (`/var/log`).
+
+## Build from source
+
+```shell
+# Fetch project
+git clone https://github.com/sundowndev/go-covermyass
+
+# Install dependencies
+go get -v -t -d ./...
+
+# Compile source
+go build -v .
+```
 
 ## Usage
 
