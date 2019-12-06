@@ -20,6 +20,9 @@ func process(files []string, callback func(path string)) {
 	}
 }
 
+/*
+ * Clear	Function that clears log files
+ */
 func Clear(files []string) {
 	process(files, func(path string) {
 		// echo "" > /var/log/auth.log
@@ -27,6 +30,9 @@ func Clear(files []string) {
 	})
 }
 
+/*
+ * Unmock	Function that delete any existing symbolic link
+ */
 func Unmock(files []string) {
 	process(files, func(path string) {
 		// rm -rf /var/log/auth.log
@@ -35,6 +41,9 @@ func Unmock(files []string) {
 	})
 }
 
+/*
+ * Mock	Function that transform log files into symbolic links
+ */
 func Mock(files []string) {
 	process(files, func(path string) {
 		// ln ...

@@ -1,5 +1,8 @@
 package config
 
+/*
+ * GeneralLogs	Log files related to the whole system
+ */
 var GeneralLogs = []string{
 	"/var/log/messages",
 	"/var/log/kern.log",
@@ -22,10 +25,16 @@ var GeneralLogs = []string{
 	"~/Library/Logs/DiagnosticReports",
 }
 
+/*
+ * AuthLogs	Log files related to system authentication
+ */
 var AuthLogs = []string{
 	"/var/log/auth.log",
 }
 
+/*
+ * HistoryLogs	Log files related to user history
+ */
 var HistoryLogs = []string{
 	"~/.bash_history",
 	"~/.zsh_history",

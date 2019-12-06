@@ -10,7 +10,7 @@ import (
 )
 
 /**
- * Throws an error and exit the tool.
+ * ThrowError	Throws an error and exit the tool.
  */
 func ThrowError(err string) {
 	fmt.Println(err)
@@ -18,7 +18,7 @@ func ThrowError(err string) {
 }
 
 /**
- * Function that reads the user input.
+ * ReadInput	Function that reads the user input.
  */
 func ReadInput(separator string) string {
 	reader := bufio.NewReader(os.Stdin)
@@ -29,7 +29,7 @@ func ReadInput(separator string) string {
 }
 
 /**
- * Function that tells you if a
+ * isWritable	Function that tells you if a
  * file is writable or not.
  */
 func isWritable(path string) bool {
