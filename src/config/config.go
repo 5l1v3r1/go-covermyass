@@ -1,9 +1,11 @@
 package config
 
+type logFiles = []string
+
 /*
  * GeneralLogs	Log files related to the whole system
  */
-var GeneralLogs = []string{
+var GeneralLogs = logFiles{
 	"/var/log/messages",
 	"/var/log/kern.log",
 	"/var/log/cron.log",
@@ -28,14 +30,14 @@ var GeneralLogs = []string{
 /*
  * AuthLogs	Log files related to system authentication
  */
-var AuthLogs = []string{
+var AuthLogs = logFiles{
 	"/var/log/auth.log",
 }
 
 /*
  * HistoryLogs	Log files related to user history
  */
-var HistoryLogs = []string{
+var HistoryLogs = logFiles{
 	"~/.bash_history",
 	"~/.zsh_history",
 }
