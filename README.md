@@ -8,6 +8,8 @@
 
 Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation. This is a Golang implementation of the original [Covermyass shell script](https://github.com/sundowndev/covermyass).
 
+>*Enter, exploit, **clean**, exit.*
+
 This tool allows you to clear log files such as :
 
 ```bash
