@@ -13,7 +13,7 @@ func process(files []string, callback func(path string)) {
 		}
 
 		if isWritable(path) {
-			ThrowError("[!] " + path + " is not writable! Retry using sudo.")
+			ThrowError("[!] " + path + " is unwritable! Please retry using sudo.")
 		}
 
 		callback(path)
@@ -37,7 +37,7 @@ func Unmock(files []string) {
 	process(files, func(path string) {
 		// rm -rf /var/log/auth.log
 		// echo "" > /var/log/auth.log
-		fmt.Println("[+] Disabled sending " + path + " logs to /dev/null")
+		fmt.Println("[+] Delete symbolic link for " + path + " to /dev/null")
 	})
 }
 
@@ -47,6 +47,6 @@ func Unmock(files []string) {
 func Mock(files []string) {
 	process(files, func(path string) {
 		// ln ...
-		fmt.Println("[+] Enabled sending " + path + " logs to /dev/null")
+		fmt.Println("[+] Create symbolic link for " + path + " to /dev/null")
 	})
 }
