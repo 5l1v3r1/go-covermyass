@@ -1,12 +1,9 @@
 package utils
 
 import (
-	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"os/user"
-	"strings"
 
 	"golang.org/x/sys/unix"
 )
@@ -15,7 +12,7 @@ import (
  * ThrowError	Throws an error and exit the tool.
  */
 func ThrowError(err string) {
-	fmt.Println(err)
+	LoggerService.Error(err)
 	os.Exit(1)
 }
 
@@ -29,17 +26,6 @@ func GetUserHomeDir() string {
 	}
 
 	return usr.HomeDir
-}
-
-/**
- * ReadInput	Function that reads the user input.
- */
-func ReadInput(separator string) string {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print(separator)
-	input, _ := reader.ReadString('\n')
-
-	return strings.TrimRight(input, "\n")
 }
 
 /**
