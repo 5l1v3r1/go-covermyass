@@ -2,29 +2,20 @@ package config
 
 import "github.com/sundowndev/go-covermyass/utils"
 
-type logFiles = []string
+type logFiles []string
+
+var userHomeDir = utils.GetUserHomeDir()
 
 /*
  * GeneralLogs	Log files related to the whole system
  */
 var GeneralLogs = logFiles{
-	"/var/log/messages/*.log",
-	"/var/log/kern.log",
-	"/var/log/cron.log",
-	"/var/log/maillog/*.log",
-	"/var/log/boot.log",
-	"/var/log/mysqld.log",
-	"/var/log/qmail/*.log",
-	"/var/log/httpd/*.log",
-	"/var/log/lighttpd/*.log",
-	"/var/log/secure/*.log",
-	"/var/log/utmp/*.log",
-	"/var/log/wtmp/*.log",
-	"/var/log/yum.log",
-	"/var/log/system.log",
-	"/var/log/DiagnosticMessages/*.log",
+	"/var/log/*.log",
 	"/Library/Logs/*.log",
-	"/Library/Logs/DiagnosticReports/*.diag",
+	"/Library/Logs/*.log",
+	"/Library/Logs/**/*.core_analytics",
+	"/Library/Logs/**/*.diag",
+	"/var/log/messages",
 }
 
 /*
@@ -38,6 +29,6 @@ var AuthLogs = logFiles{
  * HistoryLogs	Log files related to user history
  */
 var HistoryLogs = logFiles{
-	utils.GetUserHomeDir() + "/.bash_history",
-	utils.GetUserHomeDir() + "/.zsh_history",
+	userHomeDir + "/.bash_history",
+	userHomeDir + "/.zsh_history",
 }
