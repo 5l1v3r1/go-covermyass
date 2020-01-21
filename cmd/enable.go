@@ -10,8 +10,6 @@ var enableCmd = &cobra.Command{
 	Use:   "enable",
 	Short: "Enable logs",
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.Unmock(config.GeneralLogs)
-		utils.Unmock(config.HistoryLogs)
-		utils.Unmock(config.AuthLogs)
+		utils.Unmock(config.LogFiles)
 	},
 }

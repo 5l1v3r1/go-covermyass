@@ -10,8 +10,6 @@ var disableCmd = &cobra.Command{
 	Use:   "disable",
 	Short: "Disable logs",
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.Mock(config.GeneralLogs)
-		utils.Mock(config.HistoryLogs)
-		utils.Mock(config.AuthLogs)
+		utils.Mock(config.LogFiles)
 	},
 }
