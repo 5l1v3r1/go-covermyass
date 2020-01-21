@@ -1,11 +1,11 @@
 package utils
 
 import (
+	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"os/user"
-
-	"golang.org/x/sys/unix"
 )
 
 /**
@@ -29,9 +29,12 @@ func GetUserHomeDir() string {
 }
 
 /**
- * isWritable	Function that tells you if a
- * file is writable or not.
+ * ReadInput	Function that reads the user input.
  */
-func isWritable(path string) bool {
-	return unix.Access(path, unix.W_OK) == nil
+func ReadInput(separator string) string {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print(separator)
+	input, _ := reader.ReadString('\n')
+
+	return input
 }

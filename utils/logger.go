@@ -16,14 +16,14 @@ var green = color.New(color.FgGreen).PrintlnFunc()
  * Info	Log info message
  */
 func (l *logger) Info(s string) {
-	blue("[-] " + s)
+	blue("[*] " + s)
 }
 
 /**
  * Warn	Log warning message
  */
 func (l *logger) Warn(s string) {
-	orange("[i] " + s)
+	orange("[!] " + s)
 }
 
 /**
