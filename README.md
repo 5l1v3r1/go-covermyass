@@ -76,7 +76,7 @@ Use "covermyass [command] --help" for more information about a command.
 
 #### Clear logs
 
-Clearing logs will simply get it empty.
+Clearing logs will simply empty them.
 
 ```
 covermyass clear
@@ -84,7 +84,7 @@ covermyass clear
 
 #### Disable logs
 
-Disabling logs will create symbolic link to send log messages to /dev/null.
+Disabling logs will create symbolic link to temporary send log messages to /dev/null.
 
 ```
 covermyass disable
@@ -100,7 +100,7 @@ covermyass disable
 
 *NOTE: don't forget to exit the terminal session since the bash history is cached.*
 
-#### Auto confirm
+### Auto confirm
 
 Skip the user confirmation using the `-y` flag.
 
