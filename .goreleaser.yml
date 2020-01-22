@@ -19,6 +19,7 @@ changelog:
   filters:
     exclude:
     - '^ci:'
+    - '^chore:'
     - '^docs:'
     - '^test:'
     - Merge pull request
