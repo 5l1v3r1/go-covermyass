@@ -102,7 +102,7 @@ covermyass disable
 
 #### Auto confirm
 
-Using the `-y` flag
+Skip the user confirmation using the `-y` flag.
 
 ```
 covermyass clear -y
