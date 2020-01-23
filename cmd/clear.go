@@ -8,12 +8,10 @@ import (
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
-var fileProcessor = &utils.FileProcessor{}
-
 /*
  * Clear	Function that clears log files
  */
-func Clear(patterns []string) {
+func Clear(p *utils.FileProcessor, patterns []string) {
 	files := []string{}
 
 	for _, pattern := range patterns {
@@ -22,21 +20,23 @@ func Clear(patterns []string) {
 	}
 
 	for _, path := range files {
-		fileProcessor.Register(path)
+		p.Register(path)
 	}
 
-	fileProcessor.Proceed(func(path string) {
+	p.Proceed(func(path string) {
 		// echo "" > /var/log/auth.log
-		utils.LoggerService.Success("Cleared " + path)
+		utils.LoggerService.Info("Clear " + path)
 	})
 
-	utils.LoggerService.Success("Succeeded. Exiting.")
+	utils.LoggerService.Info("Exiting.")
 }
 
 var clearCmd = &cobra.Command{
 	Use:   "clear",
 	Short: "Clear the content of log files",
 	Run: func(cmd *cobra.Command, args []string) {
-		Clear(config.LogFiles)
+		fileProcessor := &utils.FileProcessor{}
+
+		Clear(fileProcessor, config.LogFiles)
 	},
 }
