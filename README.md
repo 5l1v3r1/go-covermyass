@@ -1,10 +1,10 @@
 # Covermyass
 
-[![Build status](https://github.com/SundownDEV/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
+[![Build status](https://github.com/sundowndev/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sundowndev/go-covermyass)](https://goreportcard.com/report/github.com/sundowndev/go-covermyass)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4b59f310775d23c85617/maintainability)](https://codeclimate.com/github/sundowndev/go-covermyass/maintainability)
 [![Issues](https://codeclimate.com/github/sundowndev/go-covermyass/badges/issue_count.svg)](https://codeclimate.com/github/sundowndev/go-covermyass/issues)
-[![Tag](https://img.shields.io/github/tag/SundownDEV/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
+[![Release](https://img.shields.io/github/release/sundowndev/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
 
 Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation. This is a Golang implementation of the original [Covermyass shell script](https://github.com/sundowndev/covermyass). **This tool only work for UNIX operating systems**.
 
@@ -23,18 +23,24 @@ This tool allows you to clear log files such as :
 
 ## Installation
 
-This script will download the binary in your current directory. Assuming your rights are limited, and need to delete it easily.
+This script will download the tar archive containing the binary in your current directory. Assuming your rights are limited, and need to delete it easily.
 
 ```bash
-curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o ./covermyass
-chmod +x ./covermyass
-# You can then run it using ./covermyass
-# To uninstall: rm -rf ./covermyass
+# Using curl
+curl -sSL "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz" -o ./go-covermyass.tar.gz
+tar xfv go-covermyass.tar.gz
+
+# Using wget
+wget "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz"
+tar xfv go-covermyass.tar.gz
+
+# You can then run it using ./go-covermyass
+# To uninstall: rm -rf ./go-covermyass
 ```
 
-Keep in mind that without sudo privileges, you *might* be unable to clear system-level log files (`/var/log`).
+If the download fails, it probably means your platform is not currently supported. Consider [opening an issue](https://github.com/sundowndev/go-covermyass/issues/new)!
 
-## Build from source
+### Build from source
 
 ```shell
 # Fetch project
@@ -48,6 +54,8 @@ go build -v .
 ```
 
 ## Usage
+
+Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`).
 
 ```
 covermyass # you may need to use sudo if you want to clean system-level logs
