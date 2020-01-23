@@ -1,65 +1,46 @@
 # Covermyass
 
-[![Build status](https://github.com/SundownDEV/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
+[![Build status](https://github.com/sundowndev/go-covermyass/workflows/Build/badge.svg?style=flat-square)](https://github.com/sundowndev/go-covermyass/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sundowndev/go-covermyass)](https://goreportcard.com/report/github.com/sundowndev/go-covermyass)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4b59f310775d23c85617/maintainability)](https://codeclimate.com/github/sundowndev/go-covermyass/maintainability)
 [![Issues](https://codeclimate.com/github/sundowndev/go-covermyass/badges/issue_count.svg)](https://codeclimate.com/github/sundowndev/go-covermyass/issues)
-[![Tag](https://img.shields.io/github/tag/SundownDEV/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
+[![Release](https://img.shields.io/github/release/sundowndev/go-covermyass.svg?style=flat)](https://github.com/sundowndev/go-covermyass/releases)
 
-Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation. This is a Golang implementation of the original [Covermyass shell script](https://github.com/sundowndev/covermyass).
+Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation. This is a Golang implementation of the original [Covermyass shell script](https://github.com/sundowndev/covermyass). **This tool only work for UNIX operating systems**.
 
->*Enter, exploit, **clean**, exit.*
+>*Enter, exploit, **clean up**, exit.*
 
 This tool allows you to clear log files such as :
 
 ```bash
-# Linux
-/var/log/messages # General message and system related stuff
-/var/log/auth.log # Authenication logs
-/var/log/kern.log # Kernel logs
-/var/log/cron.log # Crond logs
-/var/log/maillog # Mail server logs
-/var/log/boot.log # System boot log
-/var/log/mysqld.log # MySQL database server log file
-/var/log/qmail # Qmail log directory
-/var/log/httpd # Apache access and error logs directory
-/var/log/lighttpd # Lighttpd access and error logs directory
-/var/log/secure # Authentication log
-/var/log/utmp # Login records file
-/var/log/wtmp # Login records file
-/var/log/yum.log # Yum command log file
-
-# macOS
-/var/log/system.log # System Log
-/var/log/DiagnosticMessages # Mac Analytics Data
-/Library/Logs # System Application Logs
-/Library/Logs/DiagnosticReports # System Reports
-~/Library/Logs # User Application Logs
-~/Library/Logs/DiagnosticReports # User Reports
+/var/log/*.log
+/Library/Logs/*.log
+/Library/Logs/*.log
+/var/log/messages
+~/.bash_history
+~/.zsh_history
 ```
 
 ## Installation
 
-#### Temporary (global)
+This script will download the tar archive containing the binary in your current directory. Assuming your rights are limited, and need to delete it easily.
 
 ```bash
-curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o /tmp/covermyass
-chmod +x /tmp/covermyass
-# You can then run it using /tmp/covermyass
+# Using curl
+curl -sSL "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz" -o ./go-covermyass.tar.gz
+tar xfv go-covermyass.tar.gz
+
+# Using wget
+wget "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz"
+tar xfv go-covermyass.tar.gz
+
+# You can then run it using ./go-covermyass
+# To uninstall: rm -rf ./go-covermyass
 ```
 
-#### Permanent (local)
+If the download fails, it probably means your platform is not currently supported. Consider [opening an issue](https://github.com/sundowndev/go-covermyass/issues/new)!
 
-```bash
-curl -sSL https://github.com/sundowndev/go-covermyass/releases/download/1.0.0-alpha/covermyass -o /usr/local/bin/covermyass
-chmod +x /usr/local/bin/covermyass
-```
-
-You can now use the tool using the executable.
-
-Keep in mind that without sudo privileges, you *might* be unable to clear system-level log files (`/var/log`).
-
-## Build from source
+### Build from source
 
 ```shell
 # Fetch project
@@ -74,33 +55,65 @@ go build -v .
 
 ## Usage
 
-Simply type :
+Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`).
 
 ```
-covermyass # you may need to use sudo if you want to clean auth logs
+covermyass # you may need to use sudo if you want to clean system-level logs
 ```
 
-Follow the instructions :
+Use `--help` option to display help message :
 
 ```
-Welcome to Cover my ass tool !
+Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation.
 
-Select an option :
+Usage:
+  covermyass [command]
 
-1) Clear logs for user root
-2) Permenently disable auth & bash history
-3) Restore settings to default
-99) Exit tool
+Available Commands:
+  clear       Clear the content of log files
+  disable     Disable logs
+  enable      Enable logs
+  help        Help about any command
+  version     Print the version number of Covermyass
 
->
+Flags:
+  -h, --help   help for covermyass
+
+Use "covermyass [command] --help" for more information about a command.
+```
+
+#### Clear logs
+
+Clearing logs will simply empty them.
+
+```
+covermyass clear
+```
+
+#### Disable logs
+
+Disabling logs will create symbolic link to temporary send log messages to /dev/null.
+
+```
+covermyass disable
+```
+
+#### Enable logs
+
+Enabling logs reset files to their initial state. **WARNING**: content will be deleted and permissions might not be the same as before.
+
+```
+covermyass disable
 ```
 
 *NOTE: don't forget to exit the terminal session since the bash history is cached.*
 
-Clear logs instantly (requires *sudo* to be efficient) :
+### Auto confirm
+
+Skip the user confirmation using the `-y` flag.
 
 ```
-sudo covermyass now
+covermyass clear -y
 ```
 
 ### Using cron job
@@ -108,5 +121,5 @@ sudo covermyass now
 Clear bash history every day at 5am :
 
 ```bash
-0 5 * * * covermyass now >/dev/null 2>&1
+0 5 * * * covermyass clear -y >/dev/null 2>&1
 ```

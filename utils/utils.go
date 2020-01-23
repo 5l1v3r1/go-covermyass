@@ -3,18 +3,29 @@ package utils
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
-	"strings"
-
-	"golang.org/x/sys/unix"
+	"os/user"
 )
 
 /**
  * ThrowError	Throws an error and exit the tool.
  */
 func ThrowError(err string) {
-	fmt.Println(err)
+	LoggerService.Error(err)
 	os.Exit(1)
+}
+
+/**
+ * GetUserHomeDir	Get the current user home directory.
+ */
+func GetUserHomeDir() string {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return usr.HomeDir
 }
 
 /**
@@ -25,13 +36,5 @@ func ReadInput(separator string) string {
 	fmt.Print(separator)
 	input, _ := reader.ReadString('\n')
 
-	return strings.TrimRight(input, "\n")
-}
-
-/**
- * isWritable	Function that tells you if a
- * file is writable or not.
- */
-func isWritable(path string) bool {
-	return unix.Access(path, unix.W_OK) == nil
+	return input
 }
