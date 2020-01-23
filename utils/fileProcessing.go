@@ -6,10 +6,16 @@ import (
 	"golang.org/x/sys/unix"
 )
 
+/*
+ * FileProcessor	Check if a file exists
+ */
 type FileProcessor struct {
 	Files []string
 }
 
+/*
+ * FileExists	Check if a file exists
+ */
 func (p *FileProcessor) FileExists(path string) bool {
 	_, err := os.Stat(path)
 	os.IsNotExist(err)
@@ -17,13 +23,19 @@ func (p *FileProcessor) FileExists(path string) bool {
 	return !os.IsNotExist(err)
 }
 
+/*
+ * FileIsWritable	Check if a file is writable
+ */
 func (p *FileProcessor) FileIsWritable(path string) bool {
 	return unix.Access(path, unix.W_OK) == nil
 }
 
+/*
+ * Register	Add a file to process
+ */
 func (p *FileProcessor) Register(path string) *FileProcessor {
-	if !fileProcessor.FileIsWritable(path) {
-		LoggerService.Error(path + " is unwritable!")
+	if !p.FileIsWritable(path) {
+		LoggerService.Warn(path + " was found but is unwritable!")
 		return p
 	}
 
@@ -32,6 +44,9 @@ func (p *FileProcessor) Register(path string) *FileProcessor {
 	return p
 }
 
+/*
+ * Proceed	Use a callback for each registered file
+ */
 func (p *FileProcessor) Proceed(cb func(path string)) {
 	if len(p.Files) == 0 {
 		LoggerService.Info("No log file were found. Exiting")
