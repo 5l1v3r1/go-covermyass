@@ -8,9 +8,7 @@ import (
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
-/*
- * Clear	Function that clears log files
- */
+// Clear is a function that clears log files
 func Clear(p *utils.FileProcessor, patterns []string) {
 	files := []string{}
 

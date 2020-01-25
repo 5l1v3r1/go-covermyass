@@ -12,35 +12,25 @@ var red = color.New(color.FgRed).PrintlnFunc()
 var orange = color.New(color.FgYellow).PrintlnFunc()
 var green = color.New(color.FgGreen).PrintlnFunc()
 
-/**
- * Info	Log info message
- */
+// Info logs an info message
 func (l *logger) Info(s string) {
 	blue("[info] " + s)
 }
 
-/**
- * Warn	Log warning message
- */
+// Warn logs an warning message
 func (l *logger) Warn(s string) {
 	orange("[warn] " + s)
 }
 
-/**
- * Error	Log error message
- */
+// Error logs an error message
 func (l *logger) Error(s string) {
 	red("[error] " + s)
 }
 
-/**
- * Success	Log success message
- */
+// Success logs a success message
 func (l *logger) Success(s string) {
 	green("[success] " + s)
 }
 
-/**
- * LoggerService	Default logger instance.
- */
+// LoggerService is the default logger instance
 var LoggerService = &logger{}

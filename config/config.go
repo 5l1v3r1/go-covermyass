@@ -2,16 +2,12 @@ package config
 
 import "github.com/sundowndev/go-covermyass/utils"
 
-/*
- * LogFilesType	Type for log files list
- */
+// LogFilesType is a type alias for array of strings
 type LogFilesType []string
 
 var userHomeDir = utils.GetUserHomeDir()
 
-/*
- * Logs	Log files related to the whole system
- */
+// LogFiles is a list of log files related to the whole system
 var LogFiles = LogFilesType{
 	"/var/log/*.log",
 	"/var/log/**/*.log",

@@ -8,9 +8,7 @@ import (
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
-/*
- * Mock	Function that transforms log files into symbolic links
- */
+// Mock is a function that transforms log files into symbolic links
 func Mock(p *utils.FileProcessor, patterns []string) {
 	files := []string{}
 

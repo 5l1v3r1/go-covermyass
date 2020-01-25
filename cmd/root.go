@@ -7,9 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-/*
- * AutoConfirm Option used to skip user confirmation
- */
+// AutoConfirm is an option used to skip user confirmation
 var AutoConfirm bool
 
 func init() {
@@ -31,9 +29,7 @@ var rootCmd = &cobra.Command{
 	Long:  `Shell script to cover your tracks on UNIX systems. Designed for pen testing "covering tracks" phase, before exiting the infected server. Or, permanently disable system logs for post-exploitation.`,
 }
 
-/*
- * Execute execute root command
- */
+// Execute is a function that executes the root command
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

@@ -8,17 +8,13 @@ import (
 	"os/user"
 )
 
-/**
- * ThrowError	Throws an error and exit the tool.
- */
+// ThrowError throws an error and exit the tool
 func ThrowError(err string) {
 	LoggerService.Error(err)
 	os.Exit(1)
 }
 
-/**
- * GetUserHomeDir	Get the current user home directory.
- */
+// GetUserHomeDir returns the current user home directory
 func GetUserHomeDir() string {
 	usr, err := user.Current()
 	if err != nil {
@@ -28,9 +24,7 @@ func GetUserHomeDir() string {
 	return usr.HomeDir
 }
 
-/**
- * ReadInput	Function that reads the user input.
- */
+// ReadInput is a function that reads the user input
 func ReadInput(separator string) string {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(separator)

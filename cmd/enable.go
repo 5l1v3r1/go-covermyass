@@ -8,9 +8,7 @@ import (
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
-/*
- * Unmock	Function that delete any existing symbolic link
- */
+// Unmock is a function that delete any existing symbolic link
 func Unmock(p *utils.FileProcessor, patterns []string) {
 	files := []string{}
 
