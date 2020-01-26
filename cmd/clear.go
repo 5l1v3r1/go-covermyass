@@ -1,21 +1,22 @@
 package cmd
 
 import (
-	"path/filepath"
-
 	"github.com/spf13/cobra"
 	"github.com/sundowndev/go-covermyass/config"
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
+func init() {
+	// Register command
+	rootCmd.AddCommand(clearCmd)
+
+	// Register flags
+	clearCmd.PersistentFlags().BoolVarP(&AutoConfirm, "yes", "y", false, "Skip user confirmation")
+}
+
 // Clear is a function that clears log files
 func Clear(p *utils.FileProcessor, patterns []string) {
-	files := []string{}
-
-	for _, pattern := range patterns {
-		results, _ := filepath.Glob(pattern)
-		files = append(files, results...)
-	}
+	files := utils.GetFilesFromGlobs(patterns)
 
 	for _, path := range files {
 		p.Register(path)
@@ -26,7 +27,6 @@ func Clear(p *utils.FileProcessor, patterns []string) {
 		utils.LoggerService.Info("Clear " + path)
 	})
 
-	utils.LoggerService.Info("Exiting.")
 }
 
 var clearCmd = &cobra.Command{
@@ -36,5 +36,7 @@ var clearCmd = &cobra.Command{
 		fileProcessor := &utils.FileProcessor{}
 
 		Clear(fileProcessor, config.LogFiles)
+
+		utils.LoggerService.Success("Exiting.")
 	},
 }

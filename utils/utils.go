@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/user"
+	"path/filepath"
 )
 
 // ThrowError throws an error and exit the tool
@@ -17,6 +18,7 @@ func ThrowError(err string) {
 // GetUserHomeDir returns the current user home directory
 func GetUserHomeDir() string {
 	usr, err := user.Current()
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,4 +33,19 @@ func ReadInput(separator string) string {
 	input, _ := reader.ReadString('\n')
 
 	return input
+}
+
+// GetFilesFromGlobs is a function that finds files from glob patterns
+func GetFilesFromGlobs(patterns []string) (files []string) {
+	for _, pattern := range patterns {
+		results, err := filepath.Glob(pattern)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		files = append(files, results...)
+	}
+
+	return files
 }

@@ -1,21 +1,22 @@
 package cmd
 
 import (
-	"path/filepath"
-
 	"github.com/spf13/cobra"
 	"github.com/sundowndev/go-covermyass/config"
 	"github.com/sundowndev/go-covermyass/utils"
 )
 
+func init() {
+	// Register command
+	rootCmd.AddCommand(disableCmd)
+
+	// Register flags
+	disableCmd.PersistentFlags().BoolVarP(&AutoConfirm, "yes", "y", false, "Skip user confirmation")
+}
+
 // Mock is a function that transforms log files into symbolic links
 func Mock(p *utils.FileProcessor, patterns []string) {
-	files := []string{}
-
-	for _, pattern := range patterns {
-		results, _ := filepath.Glob(pattern)
-		files = append(files, results...)
-	}
+	files := utils.GetFilesFromGlobs(patterns)
 
 	for _, path := range files {
 		p.Register(path)
@@ -26,7 +27,6 @@ func Mock(p *utils.FileProcessor, patterns []string) {
 		utils.LoggerService.Info("Create symbolic link for " + path + " to /dev/null")
 	})
 
-	utils.LoggerService.Success("Exiting.")
 }
 
 var disableCmd = &cobra.Command{
@@ -36,5 +36,7 @@ var disableCmd = &cobra.Command{
 		fileProcessor := &utils.FileProcessor{}
 
 		Mock(fileProcessor, config.LogFiles)
+
+		utils.LoggerService.Success("Exiting.")
 	},
 }
