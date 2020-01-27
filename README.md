@@ -55,7 +55,7 @@ go build -v .
 
 ## Usage
 
-Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`).
+Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`). **Other users will notice you cleaned logs**.
 
 ```
 covermyass # you may need to use sudo if you want to clean system-level logs
@@ -92,7 +92,7 @@ covermyass clear
 
 #### Disable logs
 
-Disabling logs will create symbolic link to temporary send log messages to /dev/null.
+Disabling logs will create symbolic links to temporary send log messages to /dev/null.
 
 ```
 covermyass disable
@@ -100,10 +100,10 @@ covermyass disable
 
 #### Enable logs
 
-Enabling logs reset files to their initial state. **WARNING**: content will be deleted and permissions might not be the same as before.
+Enabling logs reset files to their initial state. **WARNING**: *file content will be deleted and permissions might be altered.*
 
 ```
-covermyass disable
+covermyass enable
 ```
 
 *NOTE: don't forget to exit the terminal session since the bash history is cached.*
