@@ -35,6 +35,13 @@ func ReadInput(separator string) string {
 	return input
 }
 
+// UserConfirmation is a function that ask for user confirmation
+func UserConfirmation(text string) bool {
+	input := ReadInput(text + " [y/N] ")
+
+	return (input != "y" && input != "Y" && input != "yes")
+}
+
 // GetFilesFromGlobs is a function that finds files from glob patterns
 func GetFilesFromGlobs(patterns []string) (files []string) {
 	for _, pattern := range patterns {
