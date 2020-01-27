@@ -19,9 +19,7 @@ func init() {
 
 // Clear is a function that clears log files
 func Clear(p *utils.FileProcessor, patterns []string) {
-	files := utils.GetFilesFromGlobs(patterns)
-
-	for _, path := range files {
+	for _, path := range utils.GetFilesFromGlobs(patterns) {
 		p.Register(path)
 	}
 

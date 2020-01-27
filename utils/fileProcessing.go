@@ -39,11 +39,6 @@ func (p *FileProcessor) Register(path string) *FileProcessor {
 // Proceed is a FileProcessor method to call an
 // anonymous function for each registered file
 func (p *FileProcessor) Proceed(cb func(path string)) {
-	if len(p.Files) == 0 {
-		LoggerService.Info("No log file were found. Exiting")
-		os.Exit(0)
-	}
-
 	for _, file := range p.Files {
 		cb(file)
 	}
