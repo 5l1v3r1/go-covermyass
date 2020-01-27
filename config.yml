@@ -1,8 +1,8 @@
-version: 1.0.0
 log_files:
     - "/var/log/*.log"
+	- "/var/log/**/*.log"
     - "/Library/Logs/*.log"
-    - "/Library/Logs/*.log"
+    - "/Library/Logs/**/*.log"
     - "/var/log/messages"
     - "$HOME/.bash_history"
     - "$HOME/.zsh_history"
