@@ -32,9 +32,13 @@ func Clear(p *utils.FileProcessor, patterns []string) {
 		utils.LoggerService.Info(path)
 	}
 
-	if confirm := utils.PromptConfirmation("The following files will be wiped, proceed?"); confirm {
-		utils.LoggerService.Info("Cancelling.")
-		os.Exit(0)
+	if !AutoConfirm {
+		confirm := utils.PromptConfirmation("The following files will be wiped, proceed?")
+
+		if confirm {
+			utils.LoggerService.Info("Cancelling.")
+			os.Exit(0)
+		}
 	}
 
 	p.Proceed(func(path string) {
