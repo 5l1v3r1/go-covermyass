@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 )
 
 // ThrowError throws an error and exit the tool
@@ -35,9 +36,10 @@ func ReadInput(separator string) string {
 	return input
 }
 
-// UserConfirmation is a function that ask for user confirmation
-func UserConfirmation(text string) bool {
+// PromptConfirmation is a function that ask for user confirmation
+func PromptConfirmation(text string) bool {
 	input := ReadInput(text + " [y/N] ")
+	input = strings.ReplaceAll(input, "\n", "")
 
 	return (input != "y" && input != "Y" && input != "yes")
 }
