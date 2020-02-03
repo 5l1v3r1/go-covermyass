@@ -10,12 +10,11 @@ Shell script to cover your tracks on UNIX systems. Designed for pen testing "cov
 
 >*Enter, exploit, **clean up**, exit.*
 
-This tool allows you to clear log files such as :
+This tool allows you to clear and mock log files such as :
 
 ```bash
-/var/log/*.log
-/Library/Logs/*.log
-/Library/Logs/*.log
+/var/log/**/*.log
+/Library/Logs/**/*.log
 /var/log/messages
 ~/.bash_history
 ~/.zsh_history
@@ -27,11 +26,13 @@ This script will download the tar archive containing the binary in your current 
 
 ```bash
 # Using curl
-curl -sSL "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz" -o ./go-covermyass.tar.gz
+# Get the latest version
+COVERMYASS_VERSION=$(curl -s https://api.github.com/repos/sundowndev/go-covermyass/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -sSL "https://github.com/sundowndev/go-covermyass/releases/download/$COVERMYASS_VERSION/go-covermyass_$(uname -s)_$(uname -m).tar.gz" -o ./go-covermyass.tar.gz
 tar xfv go-covermyass.tar.gz
 
 # Using wget
-wget "https://github.com/sundowndev/go-covermyass/releases/download/v0.0.1/go-covermyass_$(uname -s)_$(uname -m).tar.gz"
+wget "https://github.com/sundowndev/go-covermyass/releases/download/$COVERMYASS_VERSION/go-covermyass_$(uname -s)_$(uname -m).tar.gz"
 tar xfv go-covermyass.tar.gz
 
 # You can then run it using ./go-covermyass
