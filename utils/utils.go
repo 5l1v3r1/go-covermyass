@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 )
 
 // ThrowError throws an error and exit the tool
@@ -33,6 +34,14 @@ func ReadInput(separator string) string {
 	input, _ := reader.ReadString('\n')
 
 	return input
+}
+
+// PromptConfirmation is a function that ask for user confirmation
+func PromptConfirmation(text string) bool {
+	input := ReadInput(text + " [y/N] ")
+	input = strings.ReplaceAll(input, "\n", "")
+
+	return (input != "y" && input != "Y" && input != "yes")
 }
 
 // GetFilesFromGlobs is a function that finds files from glob patterns

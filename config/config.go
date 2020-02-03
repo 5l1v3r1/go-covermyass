@@ -13,11 +13,13 @@ var userHomeDir = utils.GetUserHomeDir(user.Current)
 var LogFiles = LogFilesType{
 	"/var/log/*.log",
 	"/var/log/**/*.log",
+	"/var/log/messages",
 	"/Library/Logs/*.log",
 	"/Library/Logs/**/*.log",
-	// "/Library/Logs/**/*.core_analytics",
-	// "/Library/Logs/**/*.diag",
-	"/var/log/messages",
+	"/Library/Logs/**/*.core_analytics",
+	"/Library/Logs/**/*.diag",
+	userHomeDir + "/*.log",
+	userHomeDir + "/**/*.log",
 	userHomeDir + "/.bash_history",
 	userHomeDir + "/.zsh_history",
 }
