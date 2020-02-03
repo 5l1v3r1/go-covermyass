@@ -21,9 +21,16 @@ jobs:
               curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
               dep ensure
           fi
-      - name: Build, test & lint
+
+      - name: Build
         run: |
           go build -v .
+
+      - name: Test
+        run: |
+          go test -v ./...
+
+      - name: Lint
+        run: |
           chmod +x ./scripts/*.sh
-          ./scripts/test.sh
           ./scripts/lint.sh

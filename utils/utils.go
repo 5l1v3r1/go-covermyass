@@ -16,8 +16,8 @@ func ThrowError(err string) {
 }
 
 // GetUserHomeDir returns the current user home directory
-func GetUserHomeDir() string {
-	usr, err := user.Current()
+func GetUserHomeDir(userProfile func() (*user.User, error)) string {
+	usr, err := userProfile()
 
 	if err != nil {
 		log.Fatal(err)
