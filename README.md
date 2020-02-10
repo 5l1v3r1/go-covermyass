@@ -56,7 +56,7 @@ go build -v .
 
 ## Usage
 
-Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`). **Other users will notice you cleaned logs**.
+Keep in mind that without sudo privileges, you *might* not be able to clear system-level log files (e.g: `/var/log`). **Other users will notice someone cleaned logs**.
 
 ```
 covermyass # you may need to use sudo if you want to clean system-level logs
