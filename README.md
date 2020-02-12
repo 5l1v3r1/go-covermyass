@@ -13,9 +13,15 @@ Shell script to cover your tracks on UNIX systems. Designed for pen testing "cov
 This tool allows you to clear and mock log files such as :
 
 ```bash
+/var/log/*.log
 /var/log/**/*.log
-/Library/Logs/**/*.log
 /var/log/messages
+/Library/Logs/*.log
+/Library/Logs/**/*.log
+/Library/Logs/**/*.core_analytics
+/Library/Logs/**/*.diag
+~/*.log
+~/**/*.log
 ~/.bash_history
 ~/.zsh_history
 ```
@@ -134,7 +140,7 @@ git clone https://github.com/sundowndev/go-covermyass.git
 go get -v ./...
 ```
 
-#### Lauch tests
+#### Launch tests
 
 ```
 # in terminal
