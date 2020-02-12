@@ -1,6 +1,6 @@
 log_files:
     - "/var/log/*.log"
-	- "/var/log/**/*.log"
+    - "/var/log/**/*.log"
     - "/Library/Logs/*.log"
     - "/Library/Logs/**/*.log"
     - "/var/log/messages"
