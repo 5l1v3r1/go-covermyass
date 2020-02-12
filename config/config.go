@@ -1,8 +1,10 @@
 package config
 
-import "github.com/sundowndev/go-covermyass/utils"
+import (
+	"os/user"
 
-import "os/user"
+	"github.com/sundowndev/go-covermyass/utils"
+)
 
 // LogFilesType is a type alias for array of strings
 type LogFilesType []string
