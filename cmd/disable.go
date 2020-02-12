@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"os"
+
 	"github.com/spf13/cobra"
 	"github.com/sundowndev/go-covermyass/config"
 	"github.com/sundowndev/go-covermyass/utils"
@@ -16,17 +18,35 @@ func init() {
 
 // Mock is a function that transforms log files into symbolic links
 func Mock(p *utils.FileProcessor, patterns []string) {
-	files := utils.GetFilesFromGlobs(patterns)
-
-	for _, path := range files {
+	for _, path := range utils.GetFilesFromGlobs(patterns) {
 		p.Register(path)
 	}
 
-	p.Proceed(func(path string) {
-		// ln ...
-		utils.LoggerService.Info("Create symbolic link for " + path + " to /dev/null")
-	})
+	if len(p.Files) == 0 {
+		utils.LoggerService.Info("No log file were found. Exiting.")
+		os.Exit(0)
+	}
 
+	for _, path := range p.Files {
+		utils.LoggerService.Info(path)
+	}
+
+	if !AutoConfirm {
+		confirm := utils.PromptConfirmation("The following files will be replaced by symbolic links to /dev/null, proceed?")
+
+		if confirm {
+			utils.LoggerService.Info("Cancelling.")
+			os.Exit(0)
+		}
+	}
+
+	p.Proceed(func(path string) {
+		err := os.Symlink("/dev/null", path)
+
+		if err != nil {
+			utils.ThrowError(err.Error())
+		}
+	})
 }
 
 var disableCmd = &cobra.Command{
