@@ -124,3 +124,22 @@ Clear bash history every day at 5am :
 ```bash
 0 5 * * * covermyass clear -y >/dev/null 2>&1
 ```
+
+## Development
+
+#### Clone the repository
+
+```
+git clone https://github.com/sundowndev/go-covermyass.git
+go get -v ./...
+```
+
+#### Lauch tests
+
+```
+# in terminal
+go test -v ./...
+
+# in the browser
+$GOPATH/bin/goconvey
+```
